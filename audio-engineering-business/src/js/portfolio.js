@@ -1,44 +1,100 @@
-document.querySelectorAll('.artist-circle').forEach(circle => {
-  const audio = circle.querySelector('audio');
+// js/portfolio.js
+document.addEventListener('DOMContentLoaded', () => {
+  let audioContext = null;
+  const cards = Array.from(document.querySelectorAll('.artist-card'));
 
-  // Create an AudioContext for each artist
-  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  const track = audioContext.createMediaElementSource(audio);
+  // helper to stop all playing audio + clear .playing
+  function stopAll() {
+    document.querySelectorAll('audio').forEach(a => {
+      try { a.pause(); a.currentTime = 0; } catch(e){}
+    });
+    cards.forEach(c => c.classList.remove('playing'));
+  }
 
-  // Create a compressor (works like a limiter)
-  const compressor = audioContext.createDynamicsCompressor();
-  compressor.threshold.setValueAtTime(-3, audioContext.currentTime); // start limiting above -3dB
-  compressor.knee.setValueAtTime(0, audioContext.currentTime);        // hard knee
-  compressor.ratio.setValueAtTime(20, audioContext.currentTime);      // high ratio = limiter
-  compressor.attack.setValueAtTime(0.003, audioContext.currentTime);  // fast attack
-  compressor.release.setValueAtTime(0.25, audioContext.currentTime);  // quick release
+  async function ensureAudioSetup(audio) {
+    if (audio._isSetup) return;
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    // create media element source (one per audio element)
+    const source = audioContext.createMediaElementSource(audio);
 
-  // Connect everything: track -> compressor -> destination
-  track.connect(compressor);
-  compressor.connect(audioContext.destination);
+    // create compressor (acts like a limiter)
+    const compressor = audioContext.createDynamicsCompressor();
+    compressor.threshold.setValueAtTime(-3, audioContext.currentTime);
+    compressor.knee.setValueAtTime(0, audioContext.currentTime);
+    compressor.ratio.setValueAtTime(20, audioContext.currentTime);
+    compressor.attack.setValueAtTime(0.003, audioContext.currentTime);
+    compressor.release.setValueAtTime(0.25, audioContext.currentTime);
 
-  // Lower the base volume just in case
-  audio.volume = 0.8;
+    source.connect(compressor);
+    compressor.connect(audioContext.destination);
 
-  circle.addEventListener('mouseenter', () => {
-    audio.currentTime = 0;
-    audio.play();
-    if (audioContext.state === 'suspended') {
-      audioContext.resume();
+    audio._isSetup = true;
+    audio._source = source;
+    audio._compressor = compressor;
+  }
+
+  cards.forEach(card => {
+    const audio = card.querySelector('audio');
+    const equalizerBars = card.querySelectorAll('.equalizer span');
+
+    // Prevent browser autoplay policies from causing issues:
+    // on first user interaction we can resume the context if needed.
+
+    // hover start (desktop)
+    card.addEventListener('mouseenter', async () => {
+      await handleStart(card, audio);
+    });
+
+    // hover end
+    card.addEventListener('mouseleave', () => {
+      handleStop(card, audio);
+    });
+
+    // keyboard accessibility: Enter or Space toggles play
+    card.addEventListener('keydown', async (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (audio.paused) await handleStart(card, audio);
+        else handleStop(card, audio);
+      }
+    });
+
+    // click/tap toggles (useful for mobile)
+    card.addEventListener('click', async (e) => {
+      // ignore click if user used hover-based start on desktop
+      if (audio.paused) await handleStart(card, audio);
+      else handleStop(card, audio);
+    });
+
+    // helper functions
+    async function handleStart(cardEl, audioEl) {
+      try {
+        await ensureAudioSetup(audioEl);
+        stopAll();
+        // resume context if suspended (user gesture)
+        if (audioContext && audioContext.state === 'suspended') {
+          try { await audioContext.resume(); } catch(e) {}
+        }
+        audioEl.volume = 0.8;
+        audioEl.currentTime = 0;
+        await audioEl.play().catch(() => { /* fail silently */ });
+        cardEl.classList.add('playing');
+      } catch (err) {
+        console.warn('Playback start error:', err);
+      }
+    }
+
+    function handleStop(cardEl, audioEl) {
+      try {
+        audioEl.pause();
+        audioEl.currentTime = 0;
+      } catch(e) {}
+      cardEl.classList.remove('playing');
     }
   });
 
-  circle.addEventListener('mouseleave', () => {
-    audio.pause();
-    audio.currentTime = 0;
-  });
+  // ensure that when navigation or other events would start playback elsewhere, all audio stops:
+  window.addEventListener('pagehide', stopAll);
 });
-
-// Portfolio.js
-// Handles audio playback on hover for artist circles
-
-// Select all artist circles
-// Add event listeners for mouseenter and mouseleave
-// Play the associated audio on hover, pause and reset on leave
-
-// End of portfolio.js

@@ -1,451 +1,261 @@
-/* Base Colors */
+/* ==========================================================================
+   styles.css — organized and portfolio-ready
+   Keep this file at: css/styles.css
+   ========================================================================== */
+
+/* ===========================
+   Root color variables
+   =========================== */
 :root {
   --pri: #640000;
   --sec: #ffffff;
   --tri: #000000;
   --words: #ffffff;
-  --accent: #858585; /* royal blue for subtle accents */
-  --gold: #d4af37; /* Added gold variable for your borders and highlights */
-  --white: #ffffff; /* added for convenience */
+  --accent: #858585;
+  --gold: #d4af37;
+  --white: #ffffff;
 }
 
-/* Logo Styles */
-.logo-container {
-  text-align: center;
-  margin: 2rem 0 2rem 0; /* space above and below the logo */
-}
-
-.logo {
-  width: 100px;        /* adjust size as needed */
-  height: 100px;       /* keep it square for circle */
-  border-radius: 100%;  /* makes it a perfect circle */
-  border: 4px solid var(--gold);  /* solid gold border highlight */
-  box-shadow: 0 0 10px var(--gold); /* soft glowing highlight */
-  display: block;
-  margin: -1rem auto;    /* center horizontally with margin */
-}
-
-/* Reset & Typography */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* ===========================
+   Reset & base typography
+   =========================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html,body { height: 100%; }
 body {
   font-family: 'Garamond', serif;
+  color: var(--words);
+  line-height: 1.6;
   background: linear-gradient(-45deg, var(--pri), var(--tri), var(--accent), var(--gold));
   background-size: 400% 400%;
   animation: gradientBG 20s ease infinite;
-  color: var(--words);
-  line-height: 1.6;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
-/* Keyframes for background animation */
+/* Animated background */
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-/* Logo positioned as background */
+
+/* ===========================
+   Background Logo Wrapper
+   =========================== */
 .background-wrapper {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* ensures user can interact with elements above */
-  z-index: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 0; /* stay behind everything */
+  pointer-events: none; /* clicks pass through */
 }
 
 .background-logo {
-  width: 50vw;
-  max-width: 700px;
-  opacity: 0.05; /* Makes it subtle and watermark-like */
-  filter: drop-shadow(0 0 20px var(--gold));
+  max-width: 60%;
+  max-height: 60%;
+  opacity: 0.08; /* adjust transparency */
 }
 
-/* Main content stays above background */
-.main-content {
-  position: relative;
-  z-index: 1;
-}
-
-/* Navigation */
-header {
-  background-color: var(--tri);
-  padding: 1rem 0;
-  text-align: center;
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-}
-
+/* ===========================
+   Header / Navigation
+   =========================== */
+header { background: var(--tri); text-align:center; padding: 1rem 0; }
+nav ul { list-style:none; display:flex; gap:2rem; justify-content:center; align-items:center; }
 nav a {
+  color: var(--words);
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
-  padding: 0.5rem 1rem;
+  padding: 0.35rem 0.65rem;
   position: relative;
   display: inline-block;
-  transition: transform 0.3s ease;
-  color: var(--words);
+  transition: transform 0.25s ease;
 }
 
-/* Gradient Text on Hover */
-nav a {
-  position: relative;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  color: var(--words);
-  transition: transform 0.3s ease;
-}
-
+/* underline bar effect */
 nav a::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -4px;
+  bottom: -6px;
   width: 0%;
   height: 2px;
-  background: linear-gradient(90deg, var(--gold), var(--accent));
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg,var(--gold),var(--accent));
+  transition: width 0.25s ease;
 }
+nav a:hover::after { width: 100%; }
 
-nav a:hover::after {
-  width: 100%;
-}
-
+/* gradient text on hover + scale */
 nav a:hover {
-  transform: scale(1.4);
-  background: linear-gradient(45deg, var(--gold), var(--sec), var(--gold));
+  transform: scale(1.08);
+  background: linear-gradient(90deg, var(--gold), var(--accent), var(--gold));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: transparent;
   background-size: 200%;
-  animation: gradientTextMove 2.5s linear infinite;
+  animation: navGradientMove 1.6s linear infinite;
 }
+@keyframes navGradientMove { 0% {background-position:0%} 100% {background-position:200%} }
 
-@keyframes gradientTextMove {
-  0% {
-    background-position: 0%;
-  }
-  100% {
-    background-position: 200%;
-  }
-}
+/* ===========================
+   Layout base
+   =========================== */
+main.main-content { position: relative; z-index: 1; max-width:1200px; margin: 0 auto; padding: 2rem; }
+section { margin-bottom: 3rem; }
 
-/* Main and Sections */
-main {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-section {
-  margin-bottom: 3rem;
-}
-
-/* About Me Section */
-.about-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 3rem auto;
-  padding: 0 2rem;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.about-me {
-  background-color: #1c1c1c;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  width: 60%;
-  color: var(--white);
-}
-
-.about-me h2 {
-  color: var(--gold);
-  margin-bottom: 1rem;
-  font-size: 2rem;
-}
-
-.about-me p {
-  line-height: 1.6;
-  font-size: 1.05rem;
-}
-
-/* Photo on the Right */
-.about-photo {
-  width: 35%;
-  min-width: 280px;
-  text-align: center;
-}
-
-.about-photo img {
-  width: 100%;
-  max-width: 350px;
-  height: auto;
-  object-fit: cover;
-  border-radius: 20px;
-  border: 3px solid var(--gold);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.about-photo img:hover {
-  transform: scale(1.03);
-  box-shadow: 
-    0 0 15px #f58529,   /* orange */
-    0 0 30px #dd2a7b,   /* pink */
-    0 0 45px #8134af,   /* purple */
-    0 0 60px #515bd4;   /* blue */
-  cursor: pointer;
-}
-
-/* Testimonials */
-.testimonials {
-  max-width: 900px;
-  margin: 3rem auto;
-  padding: 1rem;
-  text-align: center;
-}
-
-.testimonials h2 {
-  font-size: 2rem;
-  color: var(--sec);
-  margin-bottom: 2rem;
-}
-
-/* Container for testimonial boxes */
-.testimonial-boxes {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  flex-wrap: wrap; /* responsive wrap */
-}
-
-/* Each testimonial box */
-.testimonial-box {
-  background-color: #1c1c1c;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  padding: 1.5rem 2rem;
-  color: var(--words);
-  width: 280px;
-  font-style: italic;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.testimonial-box p {
-  margin-bottom: 1rem;
-  font-size: 1.05rem;
-  line-height: 1.4;
-}
-
-.testimonial-box span {
-  font-style: normal;
-  font-weight: bold;
-  color: var(--gold);
-  align-self: flex-end;
-}
-/* Contacts Section */
-.contact {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-  color: var(--gold);
-}
-.contact h2 {
-  background-color: var(--gold);
-  border-radius: 15px;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: var(--words);
-}
-.contact p {
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-}
-
-/* Responsive tweak */
-@media (max-width: 900px) {
-  .testimonial-boxes {
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
-  }
-  .testimonial-box {
-    width: 90%;
-  }
-}
-/* Lists */
-ul {
-  list-style: disc inside;
-  padding-left: 1rem;
-  color: var(--words);
-}
-
-li {
-  margin-bottom: 0.5rem;
-}
-
-/* Audio Portfolio */
-.audio-samples audio {
-  display: block;
-  margin: 1rem 0;
-  width: 100%;
-  max-width: 500px;
-  background: var(--tri);
-  border-radius: 6px;
-}
-
-/* Form Styles */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 600px;
-  margin-top: 1rem;
-  color: var(--words);
-}
-
-label {
-  font-weight: bold;
-}
-
-input,
-select,
-textarea {
-  padding: 0.75rem;
-  border: none;
-  border-radius: 5px;
-  background-color: #444;
-  color: var(--words);
-  font-size: 1rem;
-  resize: vertical;
-}
-
-button {
-  background-color: var(--sec);
-  color: var(--tri);
-  padding: 0.75rem;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-button:hover {
-  background-color: var(--accent);
-  color: var(--words);
-}
-
-/* Footer */
-footer {
-  background-color: var(--tri);
-  color: var(--sec);
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-}
-
-/* Portfolio Section */
-.portfolio {
-  text-align: center;
-  margin: 3rem auto;
-}
-
+/* ===========================
+   Portfolio Section
+   =========================== */
+.portfolio { text-align: center; margin: 2.5rem auto; }
 .portfolio h2 {
   color: var(--gold);
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 2.4rem;
+  letter-spacing: 1px;
+  margin-bottom: 1.25rem;
 }
 
+/* grid: responsive, fills width */
 .artist-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
   gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
+  justify-items: center;
+  padding: 0 1rem;
 }
 
-.artist-circle {
+/* artist card (circular) */
+.artist-card {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  border: 3px solid rgba(212,175,55,0.12);
+  transition: transform 0.28s cubic-bezier(.2,.9,.2,1), box-shadow 0.28s;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+  background: #111; /* fallback while image loads */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.artist-circle img {
+/* image fills circle */
+.artist-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
   border-radius: 50%;
+  transform-origin: center;
+  transition: transform 0.3s ease;
 }
 
-.artist-circle:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 25px var(--gold);
+/* hover scale and glow */
+.artist-card:hover {
+  transform: scale(1.06);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.55), 0 0 30px rgba(212,175,55,0.12);
 }
+.artist-card:hover img { transform: scale(1.03); }
 
-.artist-name {
+/* overlay: text + equalizer (hidden by default) */
+.artist-card .overlay {
   position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--sec);
-  font-weight: bold;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 0.3rem 0.6rem;
-  border-radius: 5px;
+  inset: 0;
+  background: rgba(0,0,0,0.56);
+  display: flex;
+  gap: 0.6rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.artist-circle:hover .artist-name {
+/* show overlay on hover OR when .playing is present */
+.artist-card:hover .overlay,
+.artist-card.playing .overlay {
   opacity: 1;
 }
 
+/* artist name */
+.artist-name {
+  color: var(--gold);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-align: center;
+}
 
-/* Responsive */
-@media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
+/* equalizer visual */
+.equalizer { display:flex; gap:4px; height:22px; align-items:flex-end; }
+.equalizer span {
+  width: 5px;
+  height: 6px;
+  background: linear-gradient(180deg, var(--gold), #fff);
+  animation: eqBounce 900ms infinite ease-in-out;
+  animation-play-state: paused; /* start paused */
+  border-radius: 2px;
+}
+.equalizer span:nth-child(2){ animation-delay: 120ms; }
+.equalizer span:nth-child(3){ animation-delay: 240ms; }
 
-  main {
-    padding: 1rem;
-  }
+@keyframes eqBounce {
+  0%,100% { transform: scaleY(0.2); }
+  50% { transform: scaleY(1.0); }
+}
 
-  .about-wrapper {
-    flex-direction: column;
-  }
+/* when audio is playing, run equalizer */
+.artist-card.playing .equalizer span { animation-play-state: running; }
 
-  .about-me,
-  .about-photo {
-    width: 100%;
-  }
+/* small accessibility focus style */
+.artist-card:focus { outline: 3px solid rgba(212,175,55,0.18); transform: translateY(-3px) scale(1.02); }
+
+/* ===========================
+   Other sections (About / Testimonials / Contact)
+   kept brief and consistent with palette
+   =========================== */
+.about-wrapper { display:flex; gap:2rem; align-items:center; justify-content:space-between; flex-wrap:wrap; margin: 3rem auto; padding: 0 1rem; }
+.about-me { background:#1c1c1c; padding:1.5rem; border-radius:10px; box-shadow: 0 8px 20px rgba(0,0,0,0.45); width:60%; color:var(--white); }
+.about-photo { width:35%; min-width:260px; text-align:center; }
+.about-photo img { max-width:350px; border-radius:14px; border:3px solid var(--gold); }
+
+/* testimonial boxes */
+.testimonials { max-width:900px; margin: 2rem auto; text-align:center; }
+.testimonial-boxes { display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center; }
+.testimonial-box { width:280px; background:#1c1c1c; padding:1.25rem; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.5); color:var(--words); font-style:italic; }
+
+/* contact */
+.contact { max-width:600px; margin:0 auto; text-align:center; color:var(--gold); }
+
+/* forms */
+form { display:flex; flex-direction:column; gap:1rem; max-width:600px; margin: 1rem auto; }
+input,select,textarea { padding:0.75rem; border-radius:6px; border:none; background:#444; color:var(--words); }
+
+/* buttons */
+button { background:var(--gold); color:var(--tri); border:none; padding:0.75rem 1rem; border-radius:8px; cursor:pointer; transition:transform .15s; }
+button:hover { transform:translateY(-2px); }
+
+/* footer */
+footer { text-align:center; padding:1rem; color:var(--sec); background:var(--tri); margin-top:2rem; }
+
+/* ===========================
+   Responsive tweaks
+   =========================== */
+@media (max-width: 900px) {
+  .artist-card { width: 200px; height: 200px; }
+  .about-me { width: 100%; }
+  .about-photo { width: 100%; margin-top: 1rem; }
+  nav ul { flex-direction: column; gap: 0.6rem; }
+}
+@media (max-width: 480px) {
+  .artist-card { width: 170px; height: 170px; }
+  .portfolio h2 { font-size: 1.8rem; }
 }

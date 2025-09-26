@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Portfolio - Mixed By Yao</title>
   <link rel="icon" href="assets/images/AMG Recording Logo.png" type="image/x-icon">
   <link rel="stylesheet" href="css/styles.css">
@@ -18,53 +18,84 @@
     </nav>
   </header>
 
-  <main>
+  <main class="main-content">
     <section class="portfolio">
       <h2>Portfolio</h2>
+
       <div class="artist-grid">
+
         <!-- Artist 1 -->
-        <div class="artist-circle">
-          <img src="assets/images/sarious.jpg" alt="Solarsarious" />
-          <span class="artist-name">Solarsarious</span>
-          <audio src="assets/audio/Sarious - Special.mp3"></audio>
+        <div class="artist-card" tabindex="0" aria-label="Play Solarsarious preview">
+          <img src="assets/images/sarious.jpg" alt="Solarsarious">
+          <div class="overlay">
+            <div class="artist-name">Solarsarious</div>
+            <div class="equalizer"><span></span><span></span><span></span></div>
+          </div>
+          <audio preload="metadata" src="assets/audio/Sarious - Special.mp3"></audio>
         </div>
 
         <!-- Artist 2 -->
-        <div class="artist-circle">
-          <img src="assets/images/varie.jpg" alt="Varie" />
-          <span class="artist-name">Varie</span>
-          <audio src="assets/audio/Varie - Freak (MIX).mp3"></audio>
+        <div class="artist-card" tabindex="0" aria-label="Play Varie preview">
+          <img src="assets/images/varie.jpg" alt="Varie">
+          <div class="overlay">
+            <div class="artist-name">Varie</div>
+            <div class="equalizer"><span></span><span></span><span></span></div>
+          </div>
+          <audio preload="metadata" src="assets/audio/Varie - Freak (MIX).mp3"></audio>
         </div>
 
         <!-- Artist 3 -->
-        <div class="artist-circle">
-          <img src="assets/images/jasmin.jpg" alt="Jasmin Power" />
-          <span class="artist-name">Jasmin Power</span>
-          <audio src="assets/audio/Jasmin Power - Stuck (MIX).mp3"></audio>
+        <div class="artist-card" tabindex="0" aria-label="Play Jasmin Power preview">
+          <img src="assets/images/jasmin.jpg" alt="Jasmin Power">
+          <div class="overlay">
+            <div class="artist-name">Jasmin Power</div>
+            <div class="equalizer"><span></span><span></span><span></span></div>
+          </div>
+          <audio preload="metadata" src="assets/audio/Jasmin Power - Stuck (MIX).mp3"></audio>
         </div>
 
         <!-- Artist 4 -->
-        <div class="artist-circle">
-          <img src="assets/images/domobanga.jpg" alt="Domo Banga" />
-          <span class="artist-name">Domo Banga</span>
-          <audio src="assets/audio/Domo Banga - Unnamed (MIXED).mp3"></audio>
+        <div class="artist-card" tabindex="0" aria-label="Play Domo Banga preview">
+          <img src="assets/images/domobanga.jpg" alt="Domo Banga">
+          <div class="overlay">
+            <div class="artist-name">Domo Banga</div>
+            <div class="equalizer"><span></span><span></span><span></span></div>
+          </div>
+          <audio preload="metadata" src="assets/audio/Domo Banga - Unnamed (MIXED).mp3"></audio>
         </div>
 
         <!-- Artist 5 -->
-        <div class="artist-circle">
-          <img src="assets/images/newman.jpg" alt="Newman10steps" />
-          <span class="artist-name">Newman</span>
-          <audio src="assets/audio/Newman 092125 (MIX).mp3"></audio>
-        </div>  
-        
-      <!-- Artist 6-->
-        <div class="artist-circle">
-          <img src="assets/images/dugladon.jpg" alt="Uppanotch" />
-          <span class="artist-name">Uppanotch</span>
-          <audio src="assets/audio/Uppanotch - Coup D'etat (Explicit).mp3"></audio>
-        </div> 
+        <div class="artist-card" tabindex="0" aria-label="Play Newman preview">
+          <img src="assets/images/newman.jpg" alt="Newman">
+          <div class="overlay">
+            <div class="artist-name">Newman</div>
+            <div class="equalizer"><span></span><span></span><span></span></div>
+          </div>
+          <audio preload="metadata" src="assets/audio/Newman 092125 (MIX).mp3"></audio>
+        </div>
 
+        <!-- Artist 6 -->
+        <div class="artist-card" tabindex="0" aria-label="Play Uppanotch preview">
+          <img src="assets/images/dugladon.jpg" alt="Uppanotch">
+          <div class="overlay">
+            <div class="artist-name">Uppanotch</div>
+            <div class="equalizer"><span></span><span></span><span></span></div>
+          </div>
+          <audio preload="metadata" src="assets/audio/Uppanotch - Coup D'etat (Explicit).mp3"></audio>
+        </div>
+
+        <!-- Artist 7 -->
+        <div class="artist-card" tabindex="0" aria-label="Play Splizzy preview">
+          <img src="assets/images/" alt="Splizzy Banks">
+          <div class="overlay">
+            <div class="artist-name">Splizzy Banks</div>
+            <div class="equalizer"><span></span><span></span><span></span></div>
+        </div>
+        <audio preload="metadata" src="assets/audio/Splizzy Banks - nEw Fl0w.mp3"></audio>
       </div>
+      <!-- Add more artist cards as needed -->
+
+
     </section>
   </main>
 
