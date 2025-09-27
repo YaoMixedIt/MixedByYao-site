@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (audioContext && audioContext.state === 'suspended') {
           try { await audioContext.resume(); } catch(e) {}
         }
-        audioEl.volume = 0.8;
+        audioEl.volume = 0.9;
         audioEl.currentTime = 0;
         await audioEl.play().catch(() => { /* fail silently */ });
         cardEl.classList.add('playing');

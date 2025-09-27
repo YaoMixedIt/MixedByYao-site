@@ -17,12 +17,40 @@
 }
 
 /* ===========================
+   Font import
+   =========================== */
+/* Regular */
+@font-face {
+  font-family: 'LemonMilkRegular';
+  src: url('../assets/fonts/lemon_milk/LEMONMILK-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Medium */
+@font-face {
+  font-family: 'LemonMilkBold';
+  src: url('../assets/fonts/lemon_milk/LEMONMILK-Bold.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Light */
+@font-face {
+  font-family: 'LemonMilkLight';
+  src: url('../assets/fonts/lemon_milk/LEMONMILK-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+/* ===========================
    Reset & base typography
    =========================== */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html,body { height: 100%; }
 body {
-  font-family: 'Garamond', serif;
+  font-family: Arial, Helvetica, sans-serif, sans-serif;
   color: var(--words);
   line-height: 1.6;
   background: linear-gradient(-45deg, var(--pri), var(--tri), var(--accent), var(--gold));
@@ -69,6 +97,7 @@ nav ul { list-style:none; display:flex; gap:2rem; justify-content:center; align-
 nav a {
   color: var(--words);
   text-decoration: none;
+  font-family: 'lemonmilkbold', Arial, sans-serif;
   font-weight: 600;
   font-size: 1rem;
   padding: 0.35rem 0.65rem;
@@ -114,10 +143,15 @@ section { margin-bottom: 3rem; }
    =========================== */
 .portfolio { text-align: center; margin: 2.5rem auto; }
 .portfolio h2 {
-  color: var(--gold);
+  color: var(--words);
+  font-family: 'lemonmilkbold', Arial, sans-serif;
+  text-decoration-line: overline underline;
+  text-underline-offset: 10px;
+  text-decoration-style: var(--tri);
   font-size: 2.4rem;
   letter-spacing: 1px;
   margin-bottom: 1.25rem;
+
 }
 
 /* grid: responsive, fills width */
@@ -222,8 +256,9 @@ section { margin-bottom: 3rem; }
    Other sections (About / Testimonials / Contact)
    kept brief and consistent with palette
    =========================== */
-.about-wrapper { display:flex; gap:2rem; align-items:center; justify-content:space-between; flex-wrap:wrap; margin: 3rem auto; padding: 0 1rem; }
-.about-me { background:#1c1c1c; padding:1.5rem; border-radius:10px; box-shadow: 0 8px 20px rgba(0,0,0,0.45); width:60%; color:var(--white); }
+.about-wrapper { display:flex; gap:2rem; align-items:center; justify-content:space-between; flex-wrap:wrap; margin: 3rem auto; padding: 0 1rem }
+.about-me { background:#1c1c1c; padding:1.5rem; border-radius:10px; box-shadow: 0 8px 20px rgba(0,0,0,0.45); width:60%; color:var(--white);}
+.about-me h2 { color:var(--gold); font-family: 'lemonmilkbold', Arial, sans-serif; text-decoration-line: overline underline; text-underline-offset: 7px; margin-bottom:1rem; }
 .about-photo { width:35%; min-width:260px; text-align:center; }
 .about-photo img { max-width:350px; border-radius:14px; border:3px solid var(--gold); }
 

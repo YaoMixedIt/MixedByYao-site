@@ -3,38 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact - Mixed By Yao</title>
+  <title>Contact — Mixed By Yao</title>
   <link rel="icon" href="assets/images/AMG Recording Logo.png" type="image/x-icon">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <header>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="/portfolio.html">Portfolio</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
-    <section class="contact">
+  <main class="main-content">
+    <section class="contact-section">
       <h2>Contact Me</h2>
-      <form action="#" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required />
+      <form action="https://formspree.io/f/xkgqorev" method="POST" accept-charset="UTF-8">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required />
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="_replyto" required />
 
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+  <label for="message">Message:</label>
+  <textarea id="message" name="message" rows="5" required></textarea>
 
-        <button type="submit">Send Message</button>
-      </form>
+  <!-- Formspree hidden options -->
+  <input type="hidden" name="_subject" value="New message from Mixed By Yao contact form" />
+  <input type="hidden" name="_captcha" value="false"> <!-- disables captcha if you don’t want it -->
 
-      <p>You can also reach me directly at <a href="mailto:prodbydrew19@gmail.com">prodbydrew19@gmail.com</a></p>
+  <button type="submit">Send Message</button>
+</form>
+
     </section>
   </main>
 
