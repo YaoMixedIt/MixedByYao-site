@@ -294,3 +294,67 @@ footer { text-align:center; padding:1rem; color:var(--sec); background:var(--tri
   .artist-card { width: 170px; height: 170px; }
   .portfolio h2 { font-size: 1.8rem; }
 }
+
+/* ===========================
+   Device Optimization
+   =========================== */
+
+/* Tablets (landscape & portrait) */
+@media (max-width: 1024px) {
+  main.main-content {
+    padding: 1.5rem;
+  }
+  .about-wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about-me, .about-photo {
+    width: 100%;
+  }
+  .artist-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* Small tablets / large phones */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  nav a {
+    font-size: 0.95rem;
+  }
+  .artist-card {
+    width: 180px;
+    height: 180px;
+  }
+  .about-photo img {
+    max-width: 280px;
+  }
+  .testimonial-box {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+  main.main-content {
+    padding: 1rem;
+  }
+  .portfolio h2 {
+    font-size: 1.6rem;
+  }
+  .artist-card {
+    width: 150px;
+    height: 150px;
+  }
+  .about-photo img {
+    max-width: 220px;
+  }
+  button {
+    width: 100%;
+  }
+}
